@@ -8,12 +8,10 @@ async function getGitApi(user) {
       
         avatarimage = userdetails[0].owner.avatar_url;
         console.log(avatarimage);
-        const heading = document.createElement("h2");
-heading.setAttribute("class","heading");
-const overall = document.createElement("div");
-overall.setAttribute("class","overall");
-const userimage = document.createElement("img");
-userimage.setAttribute("class","image");
+
+
+        heading.innerText="";
+        document.getElementById("overall").innerHTML = "";
       
         heading.innerText = "List of Repository";
         
@@ -41,14 +39,12 @@ function getUserRepos(user){
     
 
  
-    const info = document.createElement("div");
+    // const info = document.createElement("div");
     
-    info.setAttribute("class","container");
-
-  
-
+    // info.setAttribute("class","container");
+    
     const repodetail = document.createElement("div");
-    repodetail.setAttribute("class","repo");
+    repodetail.setAttribute("class","container");
 
     repodetail.innerHTML = `
     <div class = "details">
@@ -57,11 +53,11 @@ function getUserRepos(user){
         <p>Star Count : ${repoStarCount}</p>
     </div>   
     `;
-    info.append(repodetail);
+    // info.append(repodetail);
 
-    //details.append(info);
-    console.log(info);
-    document.body.append(info);
+    details.append(repodetail);
+    console.log(repodetail);
+    document.body.append(details);
  
     
 }
@@ -69,11 +65,7 @@ function getUserRepos(user){
 
 
 
-// const details = document.createElement("div");
-// details.setAttribute("class","details");
 
-
-// document.body.append(heading,overall,details);
 
 
 
@@ -95,20 +87,38 @@ searchinput.append(githead,inputuser,search);
 document.body.append(searchinput);
 
 
+const heading = document.createElement("h2");
+heading.setAttribute("class","heading");
 
+const overall = document.createElement("div");
+overall.setAttribute("id","overall");
+
+const userimage = document.createElement("img");
+userimage.setAttribute("class","image");
+overall.append(userimage);
+const details = document.createElement("div");
+details.setAttribute("id","details");
+
+
+document.body.append(heading,overall);
+
+document.body.append(details);
 
 
 function getUsername(){
 
     
-   //document.getElementsByClassName("details").innerHTML = "";
-    const username = document.getElementsByClassName("inputuser")[0].value;
+
+    const username = document.getElementsByClassName("inputuser")[0].value.trim();
     getGitApi(username);
     document.getElementsByClassName('inputuser')[0].value = '';
-    //document.getElementsByClassName("heading")[0].innerText= '';
-    // document.getElementsByClassName("overall")[0].value= '';
+
+    const parent = document.getElementById("details")
+    while (parent.firstChild) {
+    parent.firstChild.remove()
+    }
+
    
 }
 
-// const username = "alvinprabhakar";
-// getGitApi(username);
+
